@@ -1,6 +1,6 @@
-# KotiloPlay 🌿
+# KotiloPlay 🎧
 
-A cozy music companion with animated scenery, room-based playlists, and planned YouTube integration.
+<div><img src="src/assets/kotiloplay-logo-nobg-1.png" width="280" height="280"></div>A cozy music companion with animated scenery, room-based playlists, and planned YouTube integration.
 
 Inspired by the homepage of my home inventory app, [Kotilo](https://kotilo-nu.vercel.app/), this project turns a little house and garden into a relaxing place to enjoy music.
 

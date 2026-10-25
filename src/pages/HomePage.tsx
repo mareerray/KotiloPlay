@@ -12,9 +12,16 @@ function HomePage() {
     return (
         <section className="home-page" aria-labelledby="home-title">
             <header className="home-intro">
-                <p className="section-eyebrow">Your little corner of the world</p>
-                <h1 id="home-title">Welcome home.</h1>
-                <p>Choose a room or explore outdoors.</p>
+                <h1 id="home-title">Make yourself at home.</h1>
+
+                <p className="home-intro__tagline">
+                    A cozy home for your music.
+                </p>
+
+                <p className="home-intro__description">
+                    Slow down, settle in, and find your sound.
+                    Choose a room for your mood, or wander into the garden.
+                </p>
             </header>
             <div className="house-sky" aria-hidden="true">
                 <span className="cloud cloud-1" />
@@ -27,8 +34,8 @@ function HomePage() {
                 <span className="bird bird-2 bird-icon">🕊️</span>
                 <span className="bird bird-3 bird-icon">🕊️</span>
             </div>
-            <div className="home-landscape"> 
-                
+            <div className="home-landscape">
+
                 {/* Fence behind the house and greenery */}
                 <div className="home-fence" aria-hidden="true" />
 
@@ -146,9 +153,6 @@ function HomePage() {
                 </div>
             </div>
 
-            <Link className="home-inventory-link" to="/inventory">
-                View all belongings →
-            </Link>
         </section>
     );
 }

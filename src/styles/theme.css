@@ -1,0 +1,50 @@
+:root {
+    /* Typography */
+    --font-main: "Nunito", system-ui, sans-serif;
+
+    /* App palette */
+    --bg: #fff7ed;
+    --card: #fffaf2;
+    --card-surface: #f8ecd9;
+
+    --text: #51402e;
+    --muted: #78634e;
+    --border: #e3d2bb;
+
+    --accent: #dfa294;
+    --accent-soft: #f8e4dd;
+    --accent-strong: #875047;
+
+    --clouds: #f9e5e5;
+
+    /* Shared shape and shadow */
+    --radius: 18px;
+    --shadow: 0 8px 24px rgb(81 64 46 / 10%);
+
+    /* Existing shared-style names */
+    --surface: var(--card);
+    --primary: var(--accent-strong);
+    --primary-soft: var(--accent-soft);
+    --text-muted: var(--muted);
+
+    /* Status colors */
+    --danger: #b93838;
+    --danger-soft: #fef2f2;
+
+    /* House palette */
+    --home-beige: #fff3dd;
+    --home-green: #99aa83;
+    --home-ink: var(--text);
+    --home-wall: #927453;
+
+    --home-linen: #f8ecd9;
+    --home-oat: #f3e5cf;
+    --home-pale-sage: #e9eddb;
+    --home-mist: #f0eddf;
+
+    --home-glass: #f6ce75;
+    --home-chimney: #ead5b6;
+    --home-chimney-cap: #be9568;
+    --home-roof: #dfa294;
+    --home-wood: #bc8c58;
+}

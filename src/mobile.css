@@ -1,7 +1,7 @@
 /* ----------- Tablet and small desktop: gently scale down ---------- */
 @media (max-width: 1000px) {
     .app-shell {
-        padding: 12px;
+        padding: 24px;
     }
 
     .app-title {
@@ -77,7 +77,7 @@
     .app-shell {
         width: 100%;
         max-width: 100%;
-        padding: 12px;
+        padding: 16px;
     }
 
     .app-title {
