@@ -1,5 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { rooms } from "../data/rooms";
+import RoomPlaylist from "../components/RoomPlaylist";
+import LivingRoomTv from "../components/LivingRoomTv";
 import "./room.css";
 
 function RoomPage() {
@@ -29,21 +31,49 @@ function RoomPage() {
                 <h1 id="room-title">{room.name}</h1>
 
                 <p>
-                    Settle in, put on some music, and take a moment for yourself.
+                    Settle in, put on some music, and take a moment
+                    for yourself.
                 </p>
             </header>
-            {room.scene ? (
-                <img
-                    className="room-page__scene"
-                    src={room.scene}
-                    alt={room.sceneAlt ?? room.name}
-                    width={1200}
-                    height={820}
+
+            {room.id === "living-room" && room.scene ? (
+                <LivingRoomTv
+                    scene={room.scene}
+                    sceneAlt={room.sceneAlt ?? room.name}
+                    roomName={room.name}
+                    videoId={room.videoId}
+                    playlistId={room.playlistId}
                 />
             ) : (
-                <p className="room-page__placeholder">
-                    A cozy scene for this room is coming soon.
-                </p>
+                <>
+                    <div className="room-page__scene-wrap">
+                        {room.scene ? (
+                            <img
+                                className="room-page__scene"
+                                src={room.scene}
+                                alt={room.sceneAlt ?? room.name}
+                                width={1200}
+                                height={820}
+                            />
+                        ) : (
+                            <p className="room-page__placeholder">
+                                A cozy scene for this room is coming soon.
+                            </p>
+                        )}
+                    </div>
+
+                    {room.videoId || room.playlistId ? (
+                        <RoomPlaylist
+                            roomName={room.name}
+                            videoId={room.videoId}
+                            playlistId={room.playlistId}
+                        />
+                    ) : (
+                        <p className="room-page__music-placeholder">
+                            A soundtrack for this room is coming soon.
+                        </p>
+                    )}
+                </>
             )}
         </section>
     );

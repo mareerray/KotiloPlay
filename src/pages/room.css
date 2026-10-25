@@ -45,7 +45,7 @@
     line-height: 1.2;
 }
 
-.room-page__intro > p:last-child {
+.room-page__intro>p:last-child {
     max-width: 36ch;
     margin: 0 auto;
     color: var(--muted);
@@ -56,4 +56,63 @@
     display: block;
     width: 100%;
     height: auto;
+}
+
+/* ------------- Music playlist ------------- */
+.room-playlist {
+    box-sizing: border-box;
+    width: 220px;
+    margin: 1rem auto;
+    padding: 9px;
+    border: 1px solid #d8c7ae;
+    border-radius: 16px;
+    background: #faf2e4;
+    box-shadow: 0 6px 20px rgb(113 89 62 / 10%);
+}
+
+.room-playlist__header {
+    margin-bottom: 1rem;
+}
+
+.room-playlist__header p {
+    margin: 0 0 0.35rem;
+    color: #85745f;
+    font-size: 0.875rem;
+}
+
+.room-playlist__header h2 {
+    margin: 0;
+    color: #52664f;
+    font-size: 1.25rem;
+}
+
+.room-playlist__player {
+    display: block;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    aspect-ratio: auto;
+    border: 0;
+}
+
+.room-playlist__link {
+    display: block;
+    margin-top: 0.5rem;
+    color: #52664f;
+    font-size: 0.75rem;
+    text-align: center;
+    text-underline-offset: 3px;
+}
+
+.room-page__music-placeholder {
+    text-align: center;
+    color: #85745f;
+}
+
+/* Temporary test: give the TV scene enough room */
+.room-page {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
 }

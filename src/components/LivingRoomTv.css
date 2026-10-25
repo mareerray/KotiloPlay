@@ -1,0 +1,77 @@
+/* This component is ONLY for living-room-autumn-tv.svg.
+   Its 1200 x 820 SVG reserves x=730, y=318, w=360, h=250. */
+.room-tv {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.room-tv__stage {
+  position: relative;
+  width: 100%;
+}
+
+.room-tv__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* On narrow layouts, use the same single player BELOW the scene.
+   The wooden surround never covers the iframe. */
+.room-tv__dock {
+  box-sizing: border-box;
+  width: min(100%, 480px);
+  margin: 0.75rem auto 0;
+  padding: 14px 14px 32px;
+  border: 2px solid #927453;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #b68d64, #d1aa7a, #b58b63);
+  box-shadow: 0 8px 20px rgb(90 69 46 / 10%);
+}
+
+.room-tv__player {
+  display: block;
+  width: 100%;
+  height: 250px;
+  border: 0;
+  border-radius: 0;
+}
+
+.room-tv__link {
+  display: block;
+  width: fit-content;
+  margin: 0.75rem auto 1rem;
+  color: #6b775c;
+  font-size: 0.8rem;
+  text-underline-offset: 3px;
+}
+
+/* At 960px scene width, the screen is 288 x 200px.
+   Below that, it must not shrink with the illustration. */
+@container (min-width: 924px) {
+  .room-tv__dock {
+    position: absolute;
+
+    left: 60.8333333333%;
+    top: 37.5609756098%;
+    width: 30%;
+    height: 31.7073170732%;
+
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .room-tv__player {
+    width: 100%;
+    height: 100%;
+  }
+}
