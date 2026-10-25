@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { rooms } from "../data/rooms";
-import autumnRoom from "../assets/svg/living-room-autumn.svg";
 import "./room.css";
 
 function RoomPage() {
@@ -24,24 +23,28 @@ function RoomPage() {
 
             <header className="room-page__intro">
                 <p className="room-page__eyebrow">
-                    A little autumn escape
+                    A little cozy escape
                 </p>
 
                 <h1 id="room-title">{room.name}</h1>
 
                 <p>
-                    Golden leaves, warm tea, and a moment just for you.
+                    Settle in, put on some music, and take a moment for yourself.
                 </p>
             </header>
-
-            <img
-                className="room-page__scene"
-                src={autumnRoom}
-                alt="An animated cozy autumn living room with falling leaves,
-                    a sage armchair, a glowing lamp, and steaming tea."
-                width={800}
-                height={560}
-            />
+            {room.scene ? (
+                <img
+                    className="room-page__scene"
+                    src={room.scene}
+                    alt={room.sceneAlt ?? room.name}
+                    width={1200}
+                    height={820}
+                />
+            ) : (
+                <p className="room-page__placeholder">
+                    A cozy scene for this room is coming soon.
+                </p>
+            )}
         </section>
     );
 }
