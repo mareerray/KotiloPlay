@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/kotiloplay-logo-nobg-1.png";
 
 function AppHeader() {
     return (
@@ -9,7 +10,7 @@ function AppHeader() {
                 aria-label="KotiloPlay home"
             >
                 <img
-                    src="src/assets/kotiloplay-logo-nobg-1.png"
+                    src={logo}
                     alt=""
                     width={64}
                     height={64}
