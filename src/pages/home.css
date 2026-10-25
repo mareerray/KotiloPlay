@@ -1,0 +1,662 @@
+/*------------------ Home page ------------------*/
+
+.home-page {
+    --home-beige: #f7f0e0;
+    --home-green: #98b8a3;
+    --home-ink: #34483d;
+    --home-wall: #89877a;
+
+    --home-linen: #f0e9dc;
+    --home-oat: #eeeadd;
+    --home-pale-sage: #e5ecdf;
+    --home-mist: #e5eeea;
+    --home-glass: #e7d19f;
+    --home-chimney: #c7bcac;
+    --home-chimney-cap: #b8ae9f;
+
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--home-ink);
+    overflow-x: clip;
+}
+
+/* Welcome text */
+
+.home-intro {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.home-intro h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.15;
+    font-weight: 800;
+    text-align: center;
+}
+
+.home-intro>p:last-child {
+    margin: 0;
+    text-align: center;
+}
+
+/* Whole house */
+
+.home-house {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Roof wrapper allows smoke to appear outside the roof */
+
+.house-roof-area {
+    position: relative;
+    isolation: isolate;
+}
+
+/* Roof outline */
+
+.house-roof {
+    position: relative;
+    height: clamp(110px, 24vw, 170px);
+    background: var(--home-wall);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.house-roof-area .house-roof {
+    z-index: 1;
+}
+
+/* Sage roof */
+
+/* Sage roof with subtle staggered tile seams */
+.house-roof::before {
+    content: "";
+    position: absolute;
+    inset: 9px 14px 6px;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+
+    background:
+        /* Horizontal tile rows */
+        repeating-linear-gradient(to bottom,
+            transparent 0 23px,
+            rgb(52 72 61 / 18%) 23px 25px),
+
+        /* Vertical seams on alternating rows */
+        linear-gradient(to right,
+            rgb(52 72 61 / 14%) 2px,
+            transparent 2px) 0 0 / 48px 50px repeat,
+
+        linear-gradient(to right,
+            rgb(52 72 61 / 14%) 2px,
+            transparent 2px) 24px 25px / 48px 50px repeat,
+
+        /* Soft light across the roof */
+        linear-gradient(135deg,
+            rgb(255 255 255 / 16%),
+            transparent 60%),
+
+        var(--home-green);
+}
+
+/* Round attic window */
+
+.house-roof__window {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--home-wall);
+    border-radius: 50%;
+    background:
+        linear-gradient(to right,
+            transparent 45%,
+            var(--home-wall) 45% 55%,
+            transparent 55%),
+        linear-gradient(to bottom,
+            transparent 45%,
+            var(--home-wall) 45% 55%,
+            transparent 55%),
+        var(--home-glass);
+}
+
+/* Walls and indoor room layout */
+
+.home-map {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    grid-template-areas:
+        "bedroom bathroom"
+        "living kitchen"
+        "hallway office";
+    gap: 5px;
+    margin: 0 16px;
+    padding: 6px 6px 0;
+    background: var(--home-wall);
+}
+
+/* Clickable rooms */
+
+.home-room {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+    min-height: 155px;
+    padding: 52px 10px 20px;
+    color: var(--home-ink);
+    text-align: center;
+    text-decoration: none;
+    background: var(--home-beige);
+}
+
+.home-room--living-room {
+    grid-area: living;
+    background: var(--home-beige);
+}
+
+.home-room--bedroom {
+    grid-area: bedroom;
+    background: var(--home-linen);
+}
+
+.home-room--office {
+    grid-area: office;
+    background: var(--home-oat);
+}
+
+.home-room--kitchen {
+    grid-area: kitchen;
+    background: var(--home-pale-sage);
+}
+
+.home-room--bathroom {
+    grid-area: bathroom;
+    background: var(--home-mist);
+}
+
+.home-room--hallway {
+    grid-area: hallway;
+    background: var(--home-beige);
+}
+
+/* Small framed windows */
+
+.room-window {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 30px;
+    border: 3px solid var(--home-wall);
+    border-radius: 5px 5px 0 0;
+    background:
+        linear-gradient(to right,
+            transparent 46%,
+            var(--home-wall) 46% 54%,
+            transparent 54%),
+        linear-gradient(to bottom,
+            transparent 44%,
+            var(--home-wall) 44% 56%,
+            transparent 56%),
+        var(--home-glass);
+    pointer-events: none;
+}
+
+
+/* Room icons and names */
+.home-room__name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.home-room__hint {
+    font-size: 0.9rem;
+}
+
+.home-room__icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    color: var(--home-wall);
+}
+
+/* Room interaction */
+
+/* Room interaction */
+.home-room {
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+    .home-room:hover {
+        box-shadow: inset 0 0 0 3px var(--home-green);
+    }
+}
+
+/* Tap feedback on phones */
+.home-room:active {
+    transform: scale(0.97);
+}
+
+.home-room:focus-visible {
+    outline: 3px solid var(--home-ink);
+    outline-offset: -6px;
+}
+
+/* Front wall and entrance */
+
+.house-entrance {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 30px;
+    margin: 0 16px;
+    border: 6px solid var(--home-wall);
+    border-top-width: 5px;
+    background: var(--home-wall);
+}
+
+/* Front door */
+
+/* Arched sage door with vertical boards */
+.house-door {
+    position: relative;
+    width: 58px;
+    height: 108px;
+    border: 3px solid var(--home-wall);
+    border-bottom: 0;
+    border-radius: 22px 22px 0 0;
+
+    background:
+        repeating-linear-gradient(to right,
+            transparent 0 10px,
+            rgb(52 72 61 / 15%) 10px 11px),
+        var(--home-green);
+
+    box-shadow:
+        inset 3px 0 0 rgb(255 255 255 / 18%),
+        inset -3px 0 0 rgb(52 72 61 / 8%),
+        0 0 0 3px rgb(137 135 122 / 15%);
+}
+
+/* Small glowing window in the door */
+.house-door::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 19px;
+    height: 23px;
+    border: 2px solid var(--home-wall);
+    border-radius: 10px 10px 3px 3px;
+
+    background:
+        linear-gradient(to right,
+            transparent 44%,
+            var(--home-wall) 44% 56%,
+            transparent 56%),
+        linear-gradient(to bottom,
+            transparent 45%,
+            var(--home-wall) 45% 55%,
+            transparent 55%),
+        var(--home-glass);
+
+    box-shadow: 0 0 10px rgb(255 222 150 / 25%);
+}
+
+/* Small brass-colored door handle */
+.house-door::after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 42px;
+    width: 6px;
+    height: 6px;
+    border: 1px solid #82734f;
+    border-radius: 50%;
+    background: #d7bd81;
+    box-shadow: 1px 1px 2px rgb(52 72 61 / 18%);
+}
+
+/* Garden link */
+
+.house-garden {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 90px;
+    padding: 16px;
+    border: 2px dashed #6b8975;
+    border-radius: 16px 16px 32px 32px;
+    background: var(--home-green);
+    color: var(--muted);
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.house-garden:hover {
+    border-style: solid;
+}
+
+.house-garden:focus-visible {
+    outline: 3px solid var(--home-ink);
+    outline-offset: 4px;
+}
+
+/* Yard and decorative trees */
+
+.house-yard {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.house-yard .house-garden {
+    flex: 1;
+    min-width: 0;
+    margin-top: 0;
+}
+
+.yard-tree {
+    flex-shrink: 0;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    line-height: 1;
+}
+
+/* Chimney */
+
+.house-chimney {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    z-index: 0;
+    width: 30px;
+    height: 85%;
+    border: 3px solid var(--home-wall);
+    background:
+        repeating-linear-gradient(to bottom,
+            transparent 0 15px,
+            var(--home-wall) 15px 17px),
+        var(--home-chimney);
+}
+
+/* Chimney cap */
+
+.house-chimney::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: -7px;
+    width: calc(100% + 14px);
+    height: 10px;
+    border: 3px solid var(--home-wall);
+    border-radius: 3px;
+    background: var(--home-chimney-cap);
+}
+
+/* Animated smoke */
+
+.chimney-smoke {
+    position: absolute;
+    left: 50%;
+    top: -22px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #b5b0a5;
+    opacity: 0;
+    pointer-events: none;
+    animation: chimney-drift 5s linear infinite;
+}
+
+.chimney-smoke--two {
+    animation-delay: -1.7s;
+}
+
+.chimney-smoke--three {
+    animation-delay: -3.4s;
+}
+
+@keyframes chimney-drift {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0) scale(0.6);
+    }
+
+    20% {
+        opacity: 0.35;
+    }
+
+    65% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(16px, -60px) scale(1.8);
+    }
+}
+
+/* Inventory link */
+
+.home-inventory-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 0;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+    border: 0;
+    background: transparent;
+    color: var(--home-ink);
+
+    font: inherit;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.home-inventory-link:focus-visible {
+    outline: 3px solid var(--home-ink);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .home-page {
+        padding-top: 8px;
+    }
+
+    .home-intro p{
+        font-size: 0.85rem;
+    }
+
+    /* Scale the entire house scene on small screens */
+    .home-house {
+        zoom: 0.7;
+        width: 100%;
+        max-width: min(
+        560px,
+        calc((100vw - 72px) / 0.7)
+    );
+
+    box-sizing: border-box;
+    margin: 0 auto 4px;
+    }
+
+    .home-map,
+    .house-entrance {
+        margin-right: 8px;
+        margin-left: 8px;
+    }
+
+    .home-room {
+        min-height: 135px;
+        padding: 48px 8px 16px;
+        gap: 8px;
+    }
+
+    .home-room__icon {
+        width: 30px;
+        height: 30px;
+    }
+
+
+    .home-room__name,
+    .house-garden {
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+
+    .home-room__symbol {
+        font-size: 1.8rem;
+    }
+}
+
+/* Soft grass texture in the outdoor area */
+.house-garden {
+    position: relative;
+    overflow: hidden;
+}
+
+.house-garden::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(115deg,
+            transparent 0 10px,
+            rgb(255 255 255 / 8%) 10px 11px),
+        radial-gradient(circle at 20% 80%, rgb(255 255 255 / 12%), transparent 45%);
+    pointer-events: none;
+}
+
+/* Tiny flowers around the garden */
+.house-garden .house-garden-flower {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e2a7b5;
+    box-shadow: 0 0 0 2px rgb(255 255 255 / 35%);
+    pointer-events: none;
+}
+
+.house-garden-flower--1 {
+    top: 14px;
+    left: 18px;
+}
+
+.house-garden-flower--2 {
+    top: 26px;
+    right: 24px;
+    background: #f0cf7d;
+}
+
+.house-garden-flower--3 {
+    bottom: 16px;
+    left: 34px;
+    background: #c9d8ef;
+}
+
+/* Warm light glowing through the windows */
+.room-window,
+.house-roof__window {
+    box-shadow:
+        inset 0 0 8px rgb(255 246 210 / 85%),
+        0 0 10px 2px rgb(255 222 150 / 35%),
+        0 0 24px 6px rgb(255 222 150 / 18%);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Brighter glow: mouse hover, keyboard focus, or finger press */
+.home-room:focus-visible .room-window,
+.home-room:active .room-window {
+    box-shadow:
+        inset 0 0 10px rgb(255 250 225 / 100%),
+        0 0 14px 4px rgb(255 214 120 / 90%),
+        0 0 34px 12px rgb(255 214 120 / 55%);
+}
+
+@media (hover: hover) {
+    .home-room:hover .room-window {
+        box-shadow:
+            inset 0 0 10px rgb(255 250 225 / 100%),
+            0 0 14px 4px rgb(255 214 120 / 90%),
+            0 0 34px 12px rgb(255 214 120 / 55%);
+    }
+}
+
+/* Touch screens: windows breathe slowly, one room after another */
+@media (hover: none) {
+    .room-window {
+        animation: window-glow 4s ease-in-out infinite;
+    }
+    .home-room--bedroom .room-window     { animation-delay: 0s; }
+    .home-room--bathroom .room-window    { animation-delay: 0.6s; }
+    .home-room--living-room .room-window { animation-delay: 1.2s; }
+    .home-room--kitchen .room-window     { animation-delay: 1.8s; }
+    .home-room--hallway .room-window     { animation-delay: 2.4s; }
+    .home-room--office .room-window      { animation-delay: 3s; }
+}
+
+@keyframes window-glow {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 8px rgb(255 246 210 / 85%),
+            0 0 10px 2px rgb(255 222 150 / 35%),
+            0 0 24px 6px rgb(255 222 150 / 18%);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 10px rgb(255 250 225 / 100%),
+            0 0 14px 4px rgb(255 214 120 / 90%),
+            0 0 34px 12px rgb(255 214 120 / 55%);
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .chimney-smoke {
+        animation: none;
+        opacity: 0;
+    }
+    .room-window {
+        animation: none;
+    }
+}
+
+/* Desktop/tablet only: reduce the complete house scene */
+@media (min-width: 601px) {
+    .home-house {
+        zoom: 0.87;
+    }
+}
+
+/* A little smaller on shorter desktop windows */
+@media (min-width: 601px) and (max-height: 800px) {
+    .home-house {
+        zoom: 0.75;
+    }
+}
+
