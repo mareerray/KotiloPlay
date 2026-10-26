@@ -559,7 +559,7 @@
 /* Soft grass texture in the outdoor area */
 .house-garden {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .house-garden::before {
@@ -572,6 +572,7 @@
             rgb(255 255 255 / 8%) 10px 11px),
         radial-gradient(circle at 20% 80%, rgb(255 255 255 / 12%), transparent 45%);
     pointer-events: none;
+    border-radius: inherit;
 }
 
 /* Tiny flowers around the garden */
@@ -722,6 +723,47 @@
     color: var(--home-ink);
     font-size: 0.85rem;
     line-height: 1.6;
+}
+
+.home-room__illustration {
+    display: block;
+    width: 120px;
+    max-width: 100%;
+    height: auto;
+    flex-shrink: 0;
+    pointer-events: none;
+}
+
+.house-garden__illustration {
+    position: absolute;
+
+    /* Place it above the garden strip, right of the door. */
+    top: -80px;
+    left: calc(50% + 80px);
+
+    width: 150px;
+    max-width: none;
+    height: auto;
+
+    z-index: 2;
+    pointer-events: none;
+}
+
+.house-garden__content {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .house-garden__illustration {
+        width: 70px;
+    }
+}
+
+@media (max-width: 600px) {
+    .home-room__illustration {
+        width: 90px;
+    }
 }
 
 .site-header,

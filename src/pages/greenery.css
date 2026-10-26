@@ -365,13 +365,13 @@
     width: min(1100px, calc(100vw - 48px));
     transform: translateX(-50%);
 
-    height: 72px;
+    height: 60px;
     z-index: 0;
 
     background-image: url('/garden-fence.svg');
     background-repeat: repeat-x;
     background-position: center bottom;
-    background-size: 40px 72px;
+    background-size: 34px 60px;
 
     pointer-events: none;
 }

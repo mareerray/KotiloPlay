@@ -1,20 +1,17 @@
-import type { ComponentType } from "react";
-import SimpleIcon from "../components/SimpleIcon";
+import bedroomIcon from "../assets/svg/room-icons/bedroom-icon.svg";
+import livingRoomIcon from "../assets/svg/room-icons/living-room-icon.svg";
+import kitchenIcon from "../assets/svg/room-icons/kitchen-icon.svg";
+import bathroomIcon from "../assets/svg/room-icons/bathroom-icon.svg";
+import hallwayIcon from "../assets/svg/room-icons/hallway-icon.svg";
+import officeIcon from "../assets/svg/room-icons/office-icon.svg";
+import gardenIcon from "../assets/svg/room-icons/garden-icon.svg";
 
-type RoomIconProps = {
-  className?: string;
-  strokeWidth?: number;
-  "aria-hidden"?: boolean | "true" | "false";
-};
-
-export const roomIcons: Record<
-  string,
-  ComponentType<RoomIconProps>
-> = {
-  "Living Room": SimpleIcon,
-  Bedroom: SimpleIcon,
-  Kitchen: SimpleIcon,
-  Bathroom: SimpleIcon,
-  Hallway: SimpleIcon,
-  Office: SimpleIcon,
+export const roomIcons: Record<string, string> = {
+    bedroom: bedroomIcon,
+    "living-room": livingRoomIcon,
+    kitchen: kitchenIcon,
+    bathroom: bathroomIcon,
+    hallway: hallwayIcon,
+    office: officeIcon,
+    garden: gardenIcon,
 };
