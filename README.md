@@ -13,6 +13,8 @@ Each room will offer a different listening mood:
 - Office — focus and studying
 - Kitchen — cooking and everyday moments
 - Garden — nature sounds and outdoor ambience
+- Bathroom
+- Hallway
 
 ## Current progress
 

@@ -322,3 +322,50 @@ dialog.music-editor::backdrop {
     outline: 3px solid var(--accent-strong, #52664f);
     outline-offset: 3px;
 }
+
+/* ------------ Floating buttons for navigation between rooms ------------- */
+.room-switcher {
+    position: fixed;
+    right: max(1.75rem, env(safe-area-inset-right));
+    top: 90%;
+    transform: translateY(-50%);
+    z-index: 20;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.room-switcher__btn {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(233, 238, 223);
+    color: #5a4632;
+    font-size: 1.6rem;
+    text-decoration: none;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.room-switcher__btn:hover,
+.room-switcher__btn:focus-visible {
+    background: rgba(233, 238, 223, 1);
+}
+
+@media (max-width: 600px) {
+    .room-switcher {
+        right: max(0.75rem, env(safe-area-inset-right));
+        top: 88%;
+    }
+
+    .room-switcher__btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+}

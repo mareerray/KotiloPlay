@@ -92,6 +92,9 @@ function getDefaultLink(room: Room): string {
 
 function RoomContent({ room }: { room: Room }) {
     const dialogRef = useRef<HTMLDialogElement>(null);
+    const index = rooms.findIndex((r) => r.id === room.id);
+    const prevRoom = rooms[(index - 1 + rooms.length) % rooms.length];
+    const nextRoom = rooms[(index + 1) % rooms.length];
     const storageKey = `kotiloplay:music:${room.id}`;
 
     const [savedLink, setSavedLink] = useState(() =>
@@ -328,6 +331,26 @@ function RoomContent({ room }: { room: Room }) {
                     )}
                 </>
             )}
+
+            <nav className="room-switcher" aria-label="Switch room">
+                <Link
+                    to={`/rooms/${prevRoom.id}`}
+                    className="room-switcher__btn"
+                    aria-label={`Previous room: ${prevRoom.name}`}
+                    title={prevRoom.name}
+                >
+                    <span aria-hidden="true">«</span>
+                </Link>
+
+                <Link
+                    to={`/rooms/${nextRoom.id}`}
+                    className="room-switcher__btn"
+                    aria-label={`Next room: ${nextRoom.name}`}
+                    title={nextRoom.name}
+                >
+                    <span aria-hidden="true">»</span>
+                </Link>
+            </nav>
         </section>
     );
 }

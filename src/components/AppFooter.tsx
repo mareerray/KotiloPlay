@@ -4,8 +4,8 @@ function AppFooter() {
     return (
         <footer className="site-footer">
             <div>
-                <p className="site-footer__brand">Kotilo</p>
-                <p>Your belongings, thoughtfully organised.</p>
+                <p className="site-footer__brand">KotiloPlay</p>
+                <p>A cozy home for your music.</p>
             </div>
 
             <div className="site-footer__meta">
