@@ -11,10 +11,12 @@ import './greenery.css';
 
 function HomePage() {
     return (
-        <section className="home-page" aria-labelledby="home-title">
+        <>
             <div className="home-background" aria-hidden="true">
                 <img src={springGarden} alt="" />
             </div>
+
+        <section className="home-page" aria-labelledby="home-title">
             <header className="home-intro">
                 <h1 id="home-title">Make yourself at home.</h1>
 
@@ -158,6 +160,7 @@ function HomePage() {
             </div>
 
         </section>
+        </>
     );
 }
 
