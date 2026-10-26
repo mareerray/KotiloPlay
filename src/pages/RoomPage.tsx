@@ -1,121 +1,71 @@
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { Link, useParams } from "react-router-dom";
+
 import { rooms } from "../data/rooms";
 import type { Room } from "../data/rooms";
+
 import RoomPlaylist from "../components/RoomPlaylist";
 import RoomBackground from "../components/RoomBackground";
+import RoomSwitcher from "../components/RoomSwitcher";
+
+import {
+    MAX_SAVED_MUSIC,
+    MAX_TITLE_LENGTH,
+    parseYouTubeLink,
+    loadSavedMusic,
+    fetchMusicTitle,
+} from "../utils/roomMusic";
+
+import type {
+    MusicSource,
+    SavedMusic,
+} from "../utils/roomMusic";
+
 import "./room.css";
 
-type MusicSource = {
-    videoId?: string;
-    playlistId?: string;
-};
-
-function parseYouTubeLink(value: string): MusicSource | null {
-    try {
-        const url = new URL(value.trim());
-
-        if (
-            !["https:", "http:"].includes(url.protocol) ||
-            url.username ||
-            url.password ||
-            url.port
-        ) {
-            return null;
-        }
-
-        const host = url.hostname.toLowerCase();
-
-        const isYouTube = [
-            "youtube.com",
-            "www.youtube.com",
-            "m.youtube.com",
-            "music.youtube.com",
-        ].includes(host);
-
-        const isShortLink = host === "youtu.be";
-
-        if (!isYouTube && !isShortLink) {
-            return null;
-        }
-
-        const playlistId = url.searchParams.get("list");
-
-        if (playlistId) {
-            return /^[a-zA-Z0-9_-]{2,200}$/.test(playlistId)
-                ? { playlistId }
-                : null;
-        }
-
-        const segments = url.pathname.split("/").filter(Boolean);
-        let videoId: string | null = null;
-
-        if (isShortLink) {
-            videoId = segments[0] ?? null;
-        } else if (url.pathname === "/watch") {
-            videoId = url.searchParams.get("v");
-        } else if (
-            ["shorts", "live", "embed"].includes(segments[0])
-        ) {
-            videoId = segments[1] ?? null;
-        }
-
-        return videoId && /^[a-zA-Z0-9_-]{11}$/.test(videoId)
-            ? { videoId }
-            : null;
-    } catch {
-        return null;
-    }
-}
-
-function getSavedLink(storageKey: string): string {
-    try {
-        const saved = localStorage.getItem(storageKey);
-        return saved && parseYouTubeLink(saved) ? saved : "";
-    } catch {
-        return "";
-    }
-}
-
-function getDefaultLink(room: Room): string {
-    if (room.videoId) {
-        return `https://www.youtube.com/watch?v=${room.videoId}`;
-    }
-
-    if (room.playlistId) {
-        return `https://www.youtube.com/playlist?list=${room.playlistId}`;
-    }
-
-    return "";
-}
 
 function RoomContent({ room }: { room: Room }) {
     const dialogRef = useRef<HTMLDialogElement>(null);
-    const index = rooms.findIndex((r) => r.id === room.id);
-    const prevRoom = rooms[(index - 1 + rooms.length) % rooms.length];
-    const nextRoom = rooms[(index + 1) % rooms.length];
-    const storageKey = `kotiloplay:music:${room.id}`;
 
-    const [savedLink, setSavedLink] = useState(() =>
-        getSavedLink(storageKey)
+    const storageKey = `kotiloplay:music-list:${room.id}`;
+
+    const [savedMusic, setSavedMusic] = useState(
+        () => loadSavedMusic(storageKey)
     );
 
-    const [draftLink, setDraftLink] = useState(
-        savedLink || getDefaultLink(room)
-    );
+    // null means "use the room's default music".
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+
+    const [draftLink, setDraftLink] = useState("");
+    const [draftTitle, setDraftTitle] = useState("");
+    const [saving, setSaving] = useState(false);
 
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
 
+    const selectedMusic = savedMusic.find(
+        (item) => item.id === selectedId
+    );
+
     const music: MusicSource =
-        parseYouTubeLink(savedLink) ?? {
+        (selectedMusic
+            ? parseYouTubeLink(selectedMusic.link)
+            : null) ?? {
             videoId: room.videoId,
             playlistId: room.playlistId,
         };
 
+    const hasDefaultMusic = Boolean(
+        room.videoId || room.playlistId
+    );
+
+    const currentMusicTitle =
+        selectedMusic?.title ?? `${room.name} default`;
+
     function openEditor() {
-        setDraftLink(savedLink || getDefaultLink(room));
+        setDraftLink("");
+        setDraftTitle("");
         setError("");
         setMessage("");
         dialogRef.current?.showModal();
@@ -125,48 +75,106 @@ function RoomContent({ room }: { room: Room }) {
         dialogRef.current?.close();
     }
 
-    function saveMusic(event: FormEvent<HTMLFormElement>) {
+    async function saveMusic(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const link = draftLink.trim();
+        if (saving) {
+            return;
+        }
 
-        if (!parseYouTubeLink(link)) {
+        setError("");
+
+        if (savedMusic.length >= MAX_SAVED_MUSIC) {
+            setError(
+                "You can save up to 10 items in this room. Remove one to add another."
+            );
+            return;
+        }
+
+        const link = draftLink.trim();
+        const source = parseYouTubeLink(link);
+
+        if (!source) {
             setError(
                 "Please paste a valid YouTube video or playlist link."
             );
             return;
         }
 
-        try {
-            localStorage.setItem(storageKey, link);
-        } catch {
+        // Compare the parsed IDs so different URL formats
+        // for the same source count as duplicates.
+        const existing = savedMusic.find((item) => {
+            const other = parseYouTubeLink(item.link);
+
+            return source.playlistId
+                ? other?.playlistId === source.playlistId
+                : other?.videoId === source.videoId;
+        });
+
+        if (existing) {
             setError(
-                "Your browser could not save this choice. Check that site storage is allowed."
+                "This music is already saved in this room."
             );
             return;
         }
 
-        setSavedLink(link);
+        setSaving(true);
+
+        try {
+            const title =
+                draftTitle.trim() ||
+                (await fetchMusicTitle(source)) ||
+                (source.playlistId ? "My playlist" : "My video");
+
+            const item: SavedMusic = {
+                id: crypto.randomUUID(),
+                title: title.slice(0, MAX_TITLE_LENGTH).trim(),
+                link,
+            };
+
+            const next = [...savedMusic, item];
+
+            // Save successfully before updating the visible list.
+            localStorage.setItem(storageKey, JSON.stringify(next));
+
+            setSavedMusic(next);
+            setSelectedId(item.id);
+            setDraftLink("");
+            setDraftTitle("");
+            setMessage(`Added “${item.title}”.`);
+        } catch {
+            setError(
+                "Your browser could not save this music. Please try again."
+            );
+        } finally {
+            setSaving(false);
+        }
+    }
+
+    function selectMusic(id: string | null) {
+        setSelectedId(id);
         setError("");
-        setMessage(`Music updated for ${room.name}.`);
         closeEditor();
     }
 
-    function restoreDefault() {
+    function removeMusic(id: string) {
+        const next = savedMusic.filter((item) => item.id !== id);
+
         try {
-            localStorage.removeItem(storageKey);
+            localStorage.setItem(storageKey, JSON.stringify(next));
         } catch {
-            setError(
-                "Your browser could not remove the saved choice."
-            );
+            setError("Your browser could not remove this item.");
             return;
         }
 
-        setSavedLink("");
-        setDraftLink(getDefaultLink(room));
+        setSavedMusic(next);
         setError("");
-        setMessage(`Default music restored for ${room.name}.`);
-        closeEditor();
+
+        if (selectedId === id) {
+            setSelectedId(null);
+        }
+
+        setMessage("Saved music removed.");
     }
 
     return (
@@ -192,7 +200,6 @@ function RoomContent({ room }: { room: Room }) {
                 id="room-music-editor"
                 className="music-editor"
                 aria-labelledby="music-editor-title"
-                aria-describedby="room-music-help"
             >
                 <div className="music-editor__heading">
                     <h2 id="music-editor-title">
@@ -209,7 +216,91 @@ function RoomContent({ room }: { room: Room }) {
                     </button>
                 </div>
 
+                {hasDefaultMusic && (
+                    <section aria-labelledby="default-music-heading">
+                        <h3 id="default-music-heading">Default music</h3>
+
+                        <div className="music-editor__item">
+                            <span
+                                className={
+                                    selectedId === null
+                                        ? "music-editor__active-title"
+                                        : ""
+                                }
+                            >
+                                {selectedId === null && (
+                                    <span role="img" aria-label="Selected">
+                                        ♫{" "}
+                                    </span>
+                                )}
+                                {room.name} default
+                            </span>
+
+                            <button
+                                type="button"
+                                onClick={() => selectMusic(null)}
+                            >
+                                Select
+                            </button>
+                        </div>
+                    </section>
+                )}
+                <section aria-labelledby="saved-music-heading">
+                    <h3 id="saved-music-heading">
+                        Saved music — {savedMusic.length} / {MAX_SAVED_MUSIC}
+                    </h3>
+
+                    {savedMusic.length === 0 ? (
+                        <p>No saved music yet. Add your first choice below.</p>
+                    ) : (
+                        <ul className="music-editor__saved">
+                            {savedMusic.map((item) => (
+                                <li
+                                    key={item.id}
+                                    className="music-editor__item"
+                                >
+                                    <span
+                                        className={
+                                            selectedId === item.id
+                                                ? "music-editor__active-title"
+                                                : ""
+                                        }
+                                    >
+                                        {selectedId === item.id && (
+                                            <span role="img" aria-label="Selected">
+                                                ♫{" "}
+                                            </span>
+                                        )}
+                                        {item.title}
+                                    </span>
+
+                                    <div className="music-editor__item-actions">
+                                        <button
+                                            type="button"
+                                            disabled={saving}
+                                            onClick={() => selectMusic(item.id)}
+                                            aria-label={`Select ${item.title}`}
+                                        >
+                                            Select
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            disabled={saving}
+                                            onClick={() => removeMusic(item.id)}
+                                            aria-label={`Remove ${item.title}`}
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>)}
+                </section>
+
                 <form onSubmit={saveMusic}>
+                    <h3>Add music</h3>
+
                     <label htmlFor="room-music-link">
                         YouTube video or playlist link
                     </label>
@@ -223,52 +314,61 @@ function RoomContent({ room }: { room: Room }) {
                             setError("");
                         }}
                         placeholder="https://www.youtube.com/..."
-                        aria-describedby={
-                            error
-                                ? "room-music-help room-music-error"
-                                : "room-music-help"
-                        }
-                        aria-invalid={Boolean(error)}
-                        autoFocus
+                        disabled={saving}
                         required
+                        aria-describedby="room-music-help"
                     />
 
-                    <p
-                        id="room-music-help"
-                        className="music-editor__help"
-                    >
+                    <label htmlFor="room-music-title">
+                        Title (optional)
+                    </label>
+
+                    <input
+                        id="room-music-title"
+                        type="text"
+                        value={draftTitle}
+                        onChange={(event) =>
+                            setDraftTitle(event.target.value)
+                        }
+                        placeholder="Leave empty to try the YouTube title"
+                        maxLength={MAX_TITLE_LENGTH}
+                        disabled={saving}
+                    />
+
+                    <p id="room-music-help" className="music-editor__help">
                         Saved in this browser for this room only.
-                        Links containing a playlist use the playlist.
+                        Playlist links use the playlist.<br />
+                        Select your music, then press play in the player.
                     </p>
 
+                    {savedMusic.length >= MAX_SAVED_MUSIC && (
+                        <p>
+                            This room has 10 saved items.
+                            Remove one to add another.
+                        </p>
+                    )}
+
                     {error && (
-                        <p
-                            id="room-music-error"
-                            className="music-editor__error"
-                            role="alert"
-                        >
+                        <p className="music-editor__error" role="alert">
                             {error}
                         </p>
                     )}
 
+                    <p role="status">{message}</p>
+
                     <div className="music-editor__actions">
-                        <button type="submit">
-                            Save music
+                        <button
+                            type="submit"
+                            disabled={
+                                saving ||
+                                savedMusic.length >= MAX_SAVED_MUSIC
+                            }
+                        >
+                            {saving ? "Adding…" : "Add music"}
                         </button>
 
-                        <button
-                            type="button"
-                            onClick={closeEditor}
-                        >
-                            Cancel
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={restoreDefault}
-                            disabled={!savedLink}
-                        >
-                            Restore default
+                        <button type="button" onClick={closeEditor}>
+                            Close
                         </button>
                     </div>
                 </form>
@@ -290,49 +390,35 @@ function RoomContent({ room }: { room: Room }) {
                     for yourself.
                 </p>
             </header>
-{room.scene ? (
-    <RoomBackground
-        src={room.scene}
-        alt={room.sceneAlt ?? room.name}
-    />
-) : (
-    <p className="room-page__placeholder">
-        A cozy scene for this room is coming soon.
-    </p>
-)}
+            <p className="room-page__current-music" role="status">
+                Current music: ♫ {currentMusicTitle}
+            </p>
+            {room.scene ? (
 
-{music.videoId || music.playlistId ? (
-    <RoomPlaylist
-        roomName={room.name}
-        videoId={music.videoId}
-        playlistId={music.playlistId}
-    />
-) : (
-    <p className="room-page__music-placeholder">
-        Choose some music for this room using
-        “Change music” above.
-    </p>
-)}
+                <RoomBackground
+                    src={room.scene}
+                    alt={room.sceneAlt ?? room.name}
+                />
+            ) : (
+                <p className="room-page__placeholder">
+                    A cozy scene for this room is coming soon.
+                </p>
+            )}
 
-            <nav className="room-switcher" aria-label="Switch room">
-                <Link
-                    to={`/rooms/${prevRoom.id}`}
-                    className="room-switcher__btn"
-                    aria-label={`Previous room: ${prevRoom.name}`}
-                    title={prevRoom.name}
-                >
-                    <span aria-hidden="true">«</span>
-                </Link>
+            {music.videoId || music.playlistId ? (
+                <RoomPlaylist
+                    roomName={room.name}
+                    videoId={music.videoId}
+                    playlistId={music.playlistId}
+                />
+            ) : (
+                <p className="room-page__music-placeholder">
+                    Choose some music for this room using
+                    “Change music” above.
+                </p>
+            )}
 
-                <Link
-                    to={`/rooms/${nextRoom.id}`}
-                    className="room-switcher__btn"
-                    aria-label={`Next room: ${nextRoom.name}`}
-                    title={nextRoom.name}
-                >
-                    <span aria-hidden="true">»</span>
-                </Link>
-            </nav>
+            <RoomSwitcher roomId={room.id} />
         </section>
     );
 }

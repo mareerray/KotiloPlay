@@ -64,6 +64,20 @@
     height: auto;
 }
 
+.room-page__current-music {
+    margin: 0.5rem auto;
+    padding-inline: 0.75rem;
+    max-width: 700px;
+
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: dashed underline;
+    text-underline-offset: 3px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
 /* ------------- Music playlist ------------- */
 .room-playlist {
     box-sizing: border-box;
@@ -260,7 +274,7 @@
     margin-top: 0.75rem;
 }
 
-/* Music settings modal */
+/* ----------- Music settings dialog ----------------- */
 dialog.music-editor {
     box-sizing: border-box;
     width: min(560px, calc(100% - 2rem));
@@ -327,6 +341,85 @@ dialog.music-editor::backdrop {
 .music-editor__close:focus-visible {
     outline: 3px solid var(--accent-strong, #52664f);
     outline-offset: 3px;
+}
+
+.music-editor {
+    box-sizing: border-box;
+    width: min(92vw, 560px);
+    max-height: 85dvh;
+    overflow-y: auto;
+}
+
+.music-editor__saved {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#saved-music-heading {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.music-editor__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgb(90 69 46 / 15%);
+}
+
+.music-editor__item {
+    padding-inline: 0.75rem;
+    border-radius: 12px;
+}
+
+.music-editor__active-title {
+    color: #52633f;
+    text-decoration: dashed underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+}
+
+.music-editor__item > span {
+    flex: 1 1 140px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.music-editor__item-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.music-editor__item button {
+    min-height: 44px;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid rgb(90 69 46 / 20%);
+    border-radius: 10px;
+    background: #e9eedf;
+    color: #5a4632;
+    font: inherit;
+    cursor: pointer;
+}
+
+.music-editor button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .music-editor__item, .music-editor__item button {
+        font-size: 0.85rem;
+    }
+
+    .music-editor__item > span {
+        width: 100%;
+    }
 }
 
 /* ------------ Floating buttons for navigation between rooms ------------- */
