@@ -521,6 +521,10 @@
         padding-top: 0;
     }
 
+    .home-intro {
+        margin-bottom: 0;
+    }
+
     .home-intro p{
         font-size: 0.85rem;
     }
