@@ -78,6 +78,8 @@
         width: 100%;
         max-width: 100%;
         padding: 16px;
+        padding-top: 8px;
+        zoom: 0.95;
     }
 
     .app-title {

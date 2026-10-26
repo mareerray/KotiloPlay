@@ -5,18 +5,19 @@
     margin: 0 auto;
     color: var(--home-ink);
     overflow-x: clip;
+    padding-top: 10px;
 }
 
 /* Welcome text */
 
 .home-intro {
-    margin-bottom: 28px;
+    margin-bottom: 18px;
     text-align: center;
 }
 
 .home-intro h1 {
-    margin: 0 0 10px;
-    font-size: clamp(2rem, 6vw, 3rem);
+    margin: 6px 0 10px;
+    font-size: clamp(1.6rem, 6vw, 2.5rem);
     line-height: 1.15;
     font-weight: 800;
     text-align: center;
@@ -470,7 +471,7 @@
 
 @media (max-width: 600px) {
     .home-page {
-        padding-top: 8px;
+        padding-top: 10px;
     }
 
     .home-intro p{
@@ -635,7 +636,7 @@
 /* Desktop/tablet only: reduce the complete house scene */
 @media (min-width: 601px) {
     .home-house {
-        zoom: 0.87;
+        zoom: 0.75;
     }
 }
 
@@ -674,7 +675,7 @@
 .home-intro .home-intro__tagline {
     margin: 12px 0 8px;
     color: var(--home-ink);
-    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-size: clamp(0.85rem, 3vw, 1rem);
     font-weight: 600;
 }
 
@@ -683,6 +684,6 @@
     margin: 0 auto;
     padding: 0 16px;
     color: var(--home-ink);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     line-height: 1.6;
 }

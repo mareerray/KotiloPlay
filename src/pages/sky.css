@@ -59,7 +59,7 @@
 .cloud-5 {
     top: 6px;
     left: -360px;
-    transform: scale(0.62);
+    transform: scale(0.72);
     animation-delay: -38s;
 }
 
@@ -142,7 +142,7 @@
 /* ----------  Mobile view: smaller, faster sky animation ----------*/
 @media (max-width: 600px) {
     .house-sky {
-        top: 26%;
+        top: 20%;
         height: 100px;
     }
 
@@ -177,25 +177,25 @@
 
     .cloud-2 {
         top: 50px;
-        /* scale: 0.72; */
+        scale: 1.72;
         animation-delay: -6s;
     }
 
     .cloud-3 {
         top: 40px;
-        /* scale: 0.55; */
+        scale: 1.55;
         animation-delay: -12s;
     }
 
     .cloud-4 {
         top: 68px;
-        /* scale: 0.9; */
+        scale: 1.2;
         animation-delay: -19s;
     }
 
     .cloud-5 {
         top: 18px;
-        /* scale: 0.62; */
+        scale: 1.62;
         animation-delay: -24s;
     }
 
@@ -266,8 +266,8 @@
 /* OnePlus Nord CE4 Lite has viewport size approx.  356 x 695 Pixels */
 @media (max-width: 375px) {
     .house-sky {
-        top: 26%;
-        height: 100px;
+        top: 36%;
+        height: 120px;
     }
 }
 

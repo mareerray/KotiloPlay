@@ -199,14 +199,13 @@
     }
 
     .site-brand {
-        gap: 6px;
-        font-size: 1.1rem;
+        font-size: 1.25rem;
         min-width: 0;
     }
 
     .site-brand img {
-        width: 28px;
-        height: 28px;
+        width: 38px;
+        height: 38px;
     }
 
     .site-nav {
