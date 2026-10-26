@@ -351,6 +351,18 @@
     box-shadow: 1px 1px 2px rgb(52 72 61 / 18%);
 }
 
+@media (max-width: 600px) {
+    .house-door {
+        width: 48px;
+        height: 88px;
+    }
+
+    .house-door::before {
+        width: 15px;
+        height: 18px;
+    }
+}
+
 /* Garden link */
 
 .house-garden {
@@ -756,7 +768,9 @@
 
 @media (max-width: 600px) {
     .house-garden__illustration {
-        width: 70px;
+        width: 120px;
+        top: -70px;
+        left: calc(50% + 50px);
     }
 }
 
