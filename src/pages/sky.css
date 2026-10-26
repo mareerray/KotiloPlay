@@ -266,7 +266,7 @@
 /* OnePlus Nord CE4 Lite has viewport size approx.  356 x 695 Pixels */
 @media (max-width: 375px) {
     .house-sky {
-        top: 36%;
+        top: 24%;
         height: 120px;
     }
 }
