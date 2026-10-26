@@ -4,10 +4,13 @@ import { rooms } from '../data/rooms';
 import HouseGreenery from '../components/HouseGreenery';
 import springGarden from '../assets/svg/garden-spring.svg';
 import gardenIcon from "../assets/svg/room-icons/garden-icon.svg";
+import musicNoteDouble from "../assets/svg/music-note-double.svg";
+import musicNoteSingle from "../assets/svg/music-note-single.svg";
 import './sky.css';
 import './home.css';
 import './garden.css';
 import './greenery.css';
+import './music-notes.css';
 
 
 function HomePage() {
@@ -49,6 +52,41 @@ function HomePage() {
 
                     <div className="home-house">
                         <HouseGreenery />
+
+               {(["left", "right"] as const).map((side) => (
+    <div
+        key={side}
+        className={`house-music house-music--${side}`}
+        aria-hidden="true"
+    >
+        <img
+            className="house-music__note house-music__note--one"
+            src={musicNoteDouble}
+            alt=""
+            width={40}
+            height={48}
+            draggable={false}
+        />
+
+        <img
+            className="house-music__note house-music__note--two"
+            src={musicNoteSingle}
+            alt=""
+            width={32}
+            height={48}
+            draggable={false}
+        />
+
+        <img
+            className="house-music__note house-music__note--three"
+            src={musicNoteDouble}
+            alt=""
+            width={40}
+            height={48}
+            draggable={false}
+        />
+    </div>
+))}
 
                         {/* Decorative roof */}
                         <div className="house-roof-area" aria-hidden="true">

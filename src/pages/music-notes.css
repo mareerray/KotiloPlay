@@ -1,0 +1,173 @@
+/*------------------ House music notes ------------------*/
+
+.house-music {
+    position: absolute;
+
+    /* Start beside the upper rooms, below the roof. */
+    top: 42%;
+
+    width: 0;
+    height: 0;
+
+    z-index: 5;
+    pointer-events: none;
+}
+
+.house-music--left {
+    left: 0;
+    right: auto;
+
+    --music-direction: -1;
+}
+
+.house-music--right {
+    right: 0;
+    left: auto;
+
+    --music-direction: 1;
+}
+
+.house-music__note {
+    position: absolute;
+    left: -12px;
+    bottom: 0;
+
+    display: block;
+    width: 24px;
+    height: 32px;
+
+    opacity: 0;
+    transform-origin: center;
+    filter: drop-shadow(0 2px 1px rgb(90 65 39 / 10%));
+
+    animation: house-music-float 6s ease-out infinite;
+}
+
+.house-music__note--one {
+    --note-drift: 58px;
+    --note-rise: -38px;
+    --note-turn: 12deg;
+
+    animation-delay: -0.5s;
+}
+
+.house-music__note--two {
+    --note-drift: 82px;
+    --note-rise: -18px;
+    --note-turn: -10deg;
+
+    width: 20px;
+    height: 30px;
+
+    animation-delay: -2.5s;
+}
+
+.house-music__note--three {
+    --note-drift: 68px;
+    --note-rise: -65px;
+    --note-turn: 18deg;
+
+    width: 22px;
+    height: 30px;
+
+    animation-delay: -4.5s;
+}
+
+/* Offset the right side so both sides don't pulse together. */
+.house-music--right .house-music__note--one {
+    animation-delay: -1.5s;
+}
+
+.house-music--right .house-music__note--two {
+    animation-delay: -3.5s;
+}
+
+.house-music--right .house-music__note--three {
+    animation-delay: -5.5s;
+}
+
+@keyframes house-music-float {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(0deg) scale(0.75);
+    }
+
+    18% {
+        opacity: 0.8;
+    }
+
+    60% {
+        opacity: 0.65;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(
+                calc(var(--note-drift) * var(--music-direction)),
+                var(--note-rise)
+            )
+            rotate(
+                calc(var(--note-turn) * var(--music-direction))
+            )
+            scale(1);
+    }
+}
+
+@media (max-width: 600px) {
+    .house-music__note {
+        width: 18px;
+        height: 25px;
+        left: -9px;
+    }
+
+    .house-music__note--one {
+        --note-drift: 28px;
+        --note-rise: -28px;
+    }
+
+    .house-music__note--two {
+        --note-drift: 40px;
+        --note-rise: -14px;
+    }
+
+    .house-music__note--three {
+        --note-drift: 34px;
+        --note-rise: -46px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .house-music {
+        display: none;
+    }
+}
+
+/* Explicitly anchor the music emitters to opposite house edges. */
+
+.home-house > .house-music {
+    position: absolute;
+    top: 42%;
+    bottom: auto;
+
+    width: 0;
+    height: 0;
+
+    transform: none;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.home-house > .house-music--left {
+    left: 0;
+    right: auto;
+
+    --music-direction: -1;
+}
+
+.home-house > .house-music--right {
+    left: auto;
+    right: 0;
+
+    --music-direction: 1;
+}
