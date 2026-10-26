@@ -1,31 +1,3 @@
-/* :root {
-    --bg: #fff7ed;
-    --card: #ffffff;
-    --card-surface: #fbf8fa;
-    --clouds: #f9e5e5;
-    --accent: #f9a8d4;
-    --accent-soft: #fce7f3;
-    --text: #4a3f6b;
-    --muted: #8b8399;
-    --radius: 18px;
-    --shadow: 0 8px 24px rgba(249, 168, 212, 0.25);
-
-    --surface: var(--card);
-    --primary: var(--accent);
-    --primary-soft: var(--accent-soft);
-    --text-muted: var(--muted);
-    --border: var(--border);
-
-    --accent-strong: #be185d;
-    --danger: #dc2626;
-    --danger-soft: #fef2f2;
-
-    --font-main: "Nunito", system-ui, sans-serif;
-
-    max-width: 960px;
-    margin: 0 auto;
-} */
-
 *,
 *::before,
 *::after {
@@ -49,12 +21,27 @@ body {
     font-family: var(--font-main);
 }
 
-.app-shell {
+/* .app-shell {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
     padding: 16px;
     box-sizing: border-box;
+} */
+
+.app-shell {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-shell > main {
+    flex: 1;
+}
+
+.site-header,
+.site-footer {
+    flex-shrink: 0;
 }
 
 .app-title {

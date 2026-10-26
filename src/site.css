@@ -184,28 +184,12 @@
         white-space: nowrap;
     }
 
-    .sound-toggle {
-        width: 36px;
-        height: 36px;
-        flex: none;
-    }
-
-    .sound-toggle svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .dashboard-intro {
-        padding: 10px 0 10px;
-    }
-
     .site-footer {
         display: block;
         /* flex-direction: column; */
     }
 
     .site-footer__meta {
-        margin-top: 12px;
         text-align: left;
     }    
     

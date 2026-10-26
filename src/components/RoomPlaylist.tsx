@@ -1,4 +1,4 @@
-import "./LivingRoomTv.css";
+import "./musictv.css";
 
 type RoomPlaylistProps = {
     roomName: string;

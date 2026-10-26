@@ -1,4 +1,4 @@
-import autumnLivingRoomTv from "../assets/svg/living-room-autumn-tv.svg";
+import autumnLivingRoom from "../assets/svg/living-room-autumn.svg";
 import winterBedroom from "../assets/svg/bedroom-winter.svg";
 import summerKitchen from "../assets/svg/kitchen-summer.svg";
 import bathroomAutumn from "../assets/svg/bathroom-autumn.svg";
@@ -21,7 +21,7 @@ export const rooms: Room[] = [
     id: "living-room",
     name: "Living Room",
     slug: "living-room",
-    scene: autumnLivingRoomTv,
+    scene: autumnLivingRoom,
     sceneAlt:
       "A cozy autumn living room with golden leaves outside, a sage sofa, and steaming tea.",
     videoId: "5HzLumhIx6s",

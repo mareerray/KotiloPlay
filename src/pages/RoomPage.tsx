@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { rooms } from "../data/rooms";
 import type { Room } from "../data/rooms";
 import RoomPlaylist from "../components/RoomPlaylist";
-import LivingRoomTv from "../components/LivingRoomTv";
+import RoomBackground from "../components/RoomBackground";
 import "./room.css";
 
 type MusicSource = {
@@ -290,47 +290,29 @@ function RoomContent({ room }: { room: Room }) {
                     for yourself.
                 </p>
             </header>
+{room.scene ? (
+    <RoomBackground
+        src={room.scene}
+        alt={room.sceneAlt ?? room.name}
+    />
+) : (
+    <p className="room-page__placeholder">
+        A cozy scene for this room is coming soon.
+    </p>
+)}
 
-            {room.id === "living-room" && room.scene ? (
-                <LivingRoomTv
-                    scene={room.scene}
-                    sceneAlt={room.sceneAlt ?? room.name}
-                    roomName={room.name}
-                    videoId={music.videoId}
-                    playlistId={music.playlistId}
-                />
-            ) : (
-                <>
-                    <div className="room-page__scene-wrap">
-                        {room.scene ? (
-                            <img
-                                className="room-page__scene"
-                                src={room.scene}
-                                alt={room.sceneAlt ?? room.name}
-                                width={1200}
-                                height={820}
-                            />
-                        ) : (
-                            <p className="room-page__placeholder">
-                                A cozy scene for this room is coming soon.
-                            </p>
-                        )}
-                    </div>
-
-                    {music.videoId || music.playlistId ? (
-                        <RoomPlaylist
-                            roomName={room.name}
-                            videoId={music.videoId}
-                            playlistId={music.playlistId}
-                        />
-                    ) : (
-                        <p className="room-page__music-placeholder">
-                            Choose some music for this room using
-                            “Change music” above.
-                        </p>
-                    )}
-                </>
-            )}
+{music.videoId || music.playlistId ? (
+    <RoomPlaylist
+        roomName={room.name}
+        videoId={music.videoId}
+        playlistId={music.playlistId}
+    />
+) : (
+    <p className="room-page__music-placeholder">
+        Choose some music for this room using
+        “Change music” above.
+    </p>
+)}
 
             <nav className="room-switcher" aria-label="Switch room">
                 <Link
