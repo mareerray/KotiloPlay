@@ -7,6 +7,37 @@
     overflow-x: clip;
 }
 
+.home-page {
+    position: relative;
+    isolation: isolate;
+}
+
+.home-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.home-background img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    filter: blur(30px);
+    transform: scale(1.1);
+}
+
+/* Soften the backdrop so the house and text stand out. */
+.home-background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(233, 238, 223, 0.4);
+}
+
 /* Welcome text */
 
 .home-intro {
@@ -686,4 +717,10 @@
     color: var(--home-ink);
     font-size: 0.85rem;
     line-height: 1.6;
+}
+
+.site-header,
+.site-footer {
+    position: relative;
+    z-index: 2;
 }

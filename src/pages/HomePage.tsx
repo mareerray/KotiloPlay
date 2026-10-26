@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { roomIcons } from '../data/roomIcons';
 import { rooms } from '../data/rooms';
 import HouseGreenery from '../components/HouseGreenery';
+import springGarden from '../assets/svg/garden-spring.svg';
 import './sky.css';
 import './home.css';
 import './garden.css';
@@ -11,6 +12,9 @@ import './greenery.css';
 function HomePage() {
     return (
         <section className="home-page" aria-labelledby="home-title">
+            <div className="home-background" aria-hidden="true">
+                <img src={springGarden} alt="" />
+            </div>
             <header className="home-intro">
                 <h1 id="home-title">Make yourself at home.</h1>
 
