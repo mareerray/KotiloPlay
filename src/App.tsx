@@ -3,6 +3,7 @@ import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
 import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
+import PWAUpdatePrompt from "./components/PWAUpdatePrompt";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         </main>
           
         <AppFooter />
+        <PWAUpdatePrompt />
       </div>
     </BrowserRouter>
   );

@@ -61,24 +61,83 @@ select {
     font: inherit;
 }
 
-/* -------------- Toast message -------------- */
-.toast {
+/*------------------ PWA update prompt ------------------*/
+
+.pwa-update {
     position: fixed;
-    left: 50%;
-    bottom: 5.5rem;
-    transform: translateX(-50%);
-    background: #1f2a24;
-    color: #fff;
-    padding: .75rem 1.25rem;
-    border-radius: 999px;
-    z-index: 200;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+
+    width: min(340px, calc(100vw - 40px));
+    box-sizing: border-box;
+    padding: 18px 20px;
+
+    color: #554735;
+    background: #f7e5c9;
+    border: 1px solid #c9b99e;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 28px rgb(85 71 53 / 16%);
 }
 
-/* -------------- Pagination -------------- */
-.pagination {
+.pwa-update p {
+    margin: 0 0 14px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.pwa-update__actions {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 1.5rem 0 5rem;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.pwa-update__actions button {
+    min-height: 44px;
+    padding: 9px 16px;
+
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.25;
+
+    color: #554735;
+    background: #e1e8d6;
+    border: 1px solid #a8b599;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.pwa-update__actions button:hover {
+    background: #d3dec7;
+}
+
+.pwa-update__actions button:last-child {
+    background: transparent;
+    border-color: #bda98b;
+}
+
+.pwa-update__actions button:last-child:hover {
+    background: rgb(85 71 53 / 7%);
+}
+
+.pwa-update__actions button:focus-visible {
+    outline: 2px solid #795735;
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .pwa-update {
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+
+        width: calc(100vw - 24px);
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .pwa-update__actions button {
+        flex: 1;
+    }
 }

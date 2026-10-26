@@ -16,3 +16,20 @@
 | Bathroom    | A framed screen on a dry wall, away from the bath                        |
 | Office      | A second desk monitor with a wooden stand                                |
 | Garden      | A little outdoor cinema screen on a timber stand, surrounded by pots     |
+
+# PWA: Your setup checklist
+- vite-plugin-pwa is installed. 
+
+- vite.config.ts contains your VitePWA(...) configuration.
+
+- The PNG files exist in public/ and match their declared dimensions.
+
+- src/vite-env.d.ts contains both type references.
+
+- PWAUpdatePrompt.tsx exists.
+
+- App.tsx imports and renders <PWAUpdatePrompt /> once.
+
+- The prompt’s CSS is included.
+
+- index.html includes the Apple icon link.
