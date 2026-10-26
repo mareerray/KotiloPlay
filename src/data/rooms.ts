@@ -33,6 +33,7 @@ export const rooms: Room[] = [
     scene: winterBedroom,
     sceneAlt:
       "A cozy winter bedroom with falling snow, layered blankets, a glowing bedside lamp, and a sleeping cat.",
+      videoId: "g-bBRwv3_A0",
   },
   {
     id: "kitchen",
@@ -41,6 +42,7 @@ export const rooms: Room[] = [
     scene: summerKitchen,
     sceneAlt:
     "A cozy summer kitchen with open windows, pink curtains, flowers, fresh bread, and steaming breakfast tea.",
+    videoId: "ACgBAX4BP94",
   },
   {
     id: "bathroom",
@@ -49,6 +51,7 @@ export const rooms: Room[] = [
     scene: bathroomAutumn,
     sceneAlt:
       "A cozy autumn bathroom with golden trees and falling leaves outside, a clawfoot bath, glowing candles, and soft towels.",
+      videoId: "2zzgY6uxZ6o",
   },
   {
     id: "hallway",
@@ -57,6 +60,8 @@ export const rooms: Room[] = [
     scene: winterHallway,
     sceneAlt:
       "A cozy winter hallway with snow outside a sage front door, warm wall lights, hanging scarves, winter boots, and a sleeping dog.",
+    videoId: "20JTvsNuA6o",
+
   },
   {
     id: "office",
@@ -65,6 +70,7 @@ export const rooms: Room[] = [
     scene: springOffice,
     sceneAlt:
       "A cozy spring office with rain on the window, blossoming trees outside, a warm desk lamp, plants, and steaming tea.",
+      videoId: "aUZAjFuIwqQ",
   },
   {
     id: "outdoor",
@@ -73,5 +79,6 @@ export const rooms: Room[] = [
     scene: springGarden,
     sceneAlt:
       "A blooming spring garden with flower pots, butterflies, drifting clouds, birds, a birdhouse, and a sage watering can beside a cozy bench.",
+    videoId: "8sSk4l2A_RA",
   },
 ];

@@ -1,3 +1,5 @@
+import "./LivingRoomTv.css";
+
 type RoomPlaylistProps = {
     roomName: string;
     videoId?: string;
@@ -9,49 +11,56 @@ function RoomPlaylist({
     videoId,
     playlistId,
 }: RoomPlaylistProps) {
-    if (!videoId && !playlistId) {
+    let embedUrl: string;
+    let youtubeUrl: string;
+
+    if (videoId) {
+        const id = encodeURIComponent(videoId);
+
+        embedUrl =
+            `https://www.youtube.com/embed/${id}?playsinline=1`;
+
+        youtubeUrl =
+            `https://www.youtube.com/watch?v=${id}`;
+    } else if (playlistId) {
+        const id = encodeURIComponent(playlistId);
+
+        embedUrl =
+            "https://www.youtube.com/embed" +
+            `?listType=playlist&list=${id}&playsinline=1`;
+
+        youtubeUrl =
+            `https://www.youtube.com/playlist?list=${id}`;
+    } else {
         return null;
     }
 
-    const embedUrl = videoId
-        ? `https://www.youtube.com/embed/${encodeURIComponent(
-            videoId
-        )}?playsinline=1`
-        : `https://www.youtube.com/embed?listType=playlist&list=${encodeURIComponent(
-            playlistId!
-        )}&playsinline=1`;
-
-    const youtubeUrl = videoId
-        ? `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}`
-        : `https://www.youtube.com/playlist?list=${encodeURIComponent(
-            playlistId!
-        )}`;
-
     return (
         <section
-            className="room-playlist"
+            className="room-music-tv"
             aria-label={`${roomName} music`}
         >
-
-            <iframe
-                key={embedUrl}
-                className="room-playlist__player"
-                src={embedUrl}
-                title={`${roomName} YouTube music player`}
-                width={560}
-                height={315}
-                allow="encrypted-media; fullscreen; picture-in-picture"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-            />
+            <div className="room-tv__dock">
+                <iframe
+                    key={embedUrl}
+                    className="room-tv__player"
+                    src={embedUrl}
+                    title={`${roomName} YouTube music player`}
+                    width={360}
+                    height={250}
+                    allow="encrypted-media; fullscreen; picture-in-picture"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                />
+            </div>
 
             <a
-                className="room-playlist__link"
+                className="room-tv__link"
                 href={youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Open on YouTube ↗
+                Open music on YouTube ↗
             </a>
         </section>
     );
