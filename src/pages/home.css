@@ -67,7 +67,7 @@
 .home-house {
     max-width: 560px;
     margin: 0 auto;
-    padding: 20px 16px;
+    /* padding: 20px 16px; */
 }
 
 /* Roof wrapper allows smoke to appear outside the roof */

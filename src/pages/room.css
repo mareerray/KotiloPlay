@@ -1,7 +1,7 @@
 .room-page {
     max-width: 800px;
     margin: 0 auto;
-    padding-block: 24px;
+    padding-block: 12px;
     color: var(--text);
 }
 
@@ -607,46 +607,46 @@ dialog.music-editor::backdrop {
         font-size: 0.875rem;
     }
 
-/* One continuous glass footer */
-.site-footer {
-    box-sizing: border-box;
-    width: 100%;
-    min-width: 0;
-    height: auto;
+    /* One continuous glass footer */
+    .site-footer {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        height: auto;
 
-    margin-top: 30px;
-    padding: 1rem 1.25rem;
+        margin-top: 15px;
+        padding: 1rem 1.25rem;
 
-    border: 1px solid rgb(255 255 255 / 45%);
-    border-radius: 20px;
+        border: 1px solid rgb(255 255 255 / 45%);
+        border-radius: 20px;
 
-    background: rgb(255 248 237 / 35%);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+        background: rgb(255 248 237 / 35%);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
 
-    box-shadow: 0 4px 18px rgb(67 52 37 / 8%);
-    color: #3b2c20;
-}
+        box-shadow: 0 4px 18px rgb(67 52 37 / 8%);
+        color: #3b2c20;
+    }
 
-/* Remove the separate glass cards */
-.site-footer > * {
-    min-width: 0;
-    max-width: 100%;
-    padding: 0;
+    /* Remove the separate glass cards */
+    .site-footer > * {
+        min-width: 0;
+        max-width: 100%;
+        padding: 0;
 
-    border: 0;
-    border-radius: 0;
-    background: transparent;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
 
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: none;
 
-    overflow-wrap: anywhere;
-}
+        overflow-wrap: anywhere;
+    }
 
-.site-footer p,
-.site-footer a {
-    color: #3b2c20;
-}
+    .site-footer p,
+    .site-footer a {
+        color: #3b2c20;
+    }
 }
