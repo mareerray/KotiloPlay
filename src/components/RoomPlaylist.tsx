@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./musictv.css";
 
 type RoomPlaylistProps = {
@@ -11,6 +12,7 @@ function RoomPlaylist({
     videoId,
     playlistId,
 }: RoomPlaylistProps) {
+    const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
     let embedUrl: string;
     let youtubeUrl: string;
 
@@ -41,6 +43,16 @@ function RoomPlaylist({
             aria-label={`${roomName} music`}
         >
             <div className="room-tv__dock">
+                {loadedUrl !== embedUrl && (
+                    <div className="room-tv__loader" role="status">
+                        <span
+                            className="room-tv__spinner"
+                            aria-hidden="true"
+                        />
+                        <span>Tuning in…</span>
+                    </div>
+                )}
+
                 <iframe
                     key={embedUrl}
                     className="room-tv__player"
@@ -51,6 +63,7 @@ function RoomPlaylist({
                     allow="encrypted-media; fullscreen; picture-in-picture"
                     referrerPolicy="strict-origin-when-cross-origin"
                     allowFullScreen
+                    onLoad={() => setLoadedUrl(embedUrl)}
                 />
             </div>
 
