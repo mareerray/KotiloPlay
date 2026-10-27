@@ -49,44 +49,45 @@ function HomePage() {
                     {/* Fence behind the house and greenery */}
                     <div className="home-fence" aria-hidden="true" />
 
-
                     <div className="home-house">
+                        {/* Greenery around the house */}
                         <HouseGreenery />
 
-               {(["left", "right"] as const).map((side) => (
-    <div
-        key={side}
-        className={`house-music house-music--${side}`}
-        aria-hidden="true"
-    >
-        <img
-            className="house-music__note house-music__note--one"
-            src={musicNoteDouble}
-            alt=""
-            width={40}
-            height={48}
-            draggable={false}
-        />
+                        {/* Music notes around the house */}
+                        {(["left", "right"] as const).map((side) => (
+                            <div
+                                key={side}
+                                className={`house-music house-music--${side}`}
+                                aria-hidden="true"
+                            >
+                                <img
+                                    className="house-music__note house-music__note--one"
+                                    src={musicNoteDouble}
+                                    alt=""
+                                    width={40}
+                                    height={48}
+                                    draggable={false}
+                                />
 
-        <img
-            className="house-music__note house-music__note--two"
-            src={musicNoteSingle}
-            alt=""
-            width={32}
-            height={48}
-            draggable={false}
-        />
+                                <img
+                                    className="house-music__note house-music__note--two"
+                                    src={musicNoteSingle}
+                                    alt=""
+                                    width={32}
+                                    height={48}
+                                    draggable={false}
+                                />
 
-        <img
-            className="house-music__note house-music__note--three"
-            src={musicNoteDouble}
-            alt=""
-            width={40}
-            height={48}
-            draggable={false}
-        />
-    </div>
-))}
+                                <img
+                                    className="house-music__note house-music__note--three"
+                                    src={musicNoteDouble}
+                                    alt=""
+                                    width={40}
+                                    height={48}
+                                    draggable={false}
+                                />
+                            </div>
+                        ))}
 
                         {/* Decorative roof */}
                         <div className="house-roof-area" aria-hidden="true">
@@ -126,6 +127,9 @@ function HomePage() {
                                         )}
 
                                         <span className="home-room__name">
+                                            <span className="home-roomname__hint" aria-hidden="true">
+                                                ➤
+                                            </span>
                                             {room.name}
                                         </span>
                                     </Link>
@@ -188,6 +192,9 @@ function HomePage() {
                                     />
 
                                     <span className="house-garden__content">
+                                        <span className="home-roomname__hint" aria-hidden="true">
+                                                ➤
+                                            </span>
                                         {room.name}
                                     </span>
                                 </Link>

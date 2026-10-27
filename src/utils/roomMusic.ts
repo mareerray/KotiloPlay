@@ -60,7 +60,7 @@ export function parseYouTubeLink(value: string): MusicSource | null {
     }
 }
 export const MAX_SAVED_MUSIC = 10;
-export const MAX_TITLE_LENGTH = 50;
+export const MAX_TITLE_LENGTH = 30;
 
 export type SavedMusic = {
     id: string;

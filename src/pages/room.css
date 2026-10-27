@@ -233,8 +233,8 @@
 }
 
 .music-editor__actions button {
-    min-height: 44px;
-    padding: 0.6rem 0.9rem;
+    min-height: 40px;
+    padding: 0.4rem 0.6rem;
 
     border: 1px solid #d0bea4;
     border-radius: 12px;
@@ -384,7 +384,7 @@ dialog.music-editor::backdrop {
     font-weight: 600;
 }
 
-.music-editor__item > span {
+.music-editor__item>span {
     flex: 1 1 140px;
     min-width: 0;
     overflow-wrap: anywhere;
@@ -397,13 +397,14 @@ dialog.music-editor::backdrop {
 }
 
 .music-editor__item button {
-    min-height: 44px;
-    padding: 0.4rem 0.75rem;
+    min-height: 40px;
+    padding: 0.4rem 0.6rem;
     border: 1px solid rgb(90 69 46 / 20%);
     border-radius: 10px;
     background: #e9eedf;
     color: #5a4632;
     font: inherit;
+    font-size: 0.875rem;
     cursor: pointer;
 }
 
@@ -413,11 +414,13 @@ dialog.music-editor::backdrop {
 }
 
 @media (max-width: 600px) {
-    .music-editor__item, .music-editor__item button {
+
+    .music-editor__item,
+    .music-editor__item button {
         font-size: 0.85rem;
     }
 
-    .music-editor__item > span {
+    .music-editor__item>span {
         width: 100%;
     }
 }
@@ -538,4 +541,112 @@ dialog.music-editor::backdrop {
     .room-page__toolbar {
         zoom: 0.95;
     }
+}
+
+/* Desktop readability: frosted glass panels */
+@media (min-width: 1201px) {
+
+    .room-page__back,
+    .room-page__intro,
+    .room-page__current-music,
+    .room-playlist__link,
+    .site-footer {
+        background: rgb(255 248 237 / 45%);
+        -webkit-backdrop-filter: blur(12px) saturate(140%);
+        backdrop-filter: blur(12px) saturate(140%);
+        border: 1px solid rgb(255 255 255 / 55%);
+        box-shadow: 0 8px 28px rgb(67 52 37 / 14%);
+        color: #3b2c20;
+    }
+
+    .room-page__back {
+        padding: 0.35rem 1rem;
+        border-radius: 999px;
+    }
+
+    .room-page__intro {
+        box-sizing: border-box;
+        width: min(100%, 420px);
+        margin: 1rem auto 0;
+        padding: 1.25rem 1.5rem;
+        border-radius: 24px;
+    }
+
+    .room-page__intro .room-page__eyebrow {
+        color: #6f3f2e;
+    }
+
+    .room-page__intro h1 {
+        color: #3b2c20;
+    }
+
+    .room-page__intro>p:last-child {
+        color: #4a3a2c;
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    .room-page__current-music {
+        box-sizing: border-box;
+        width: fit-content;
+        max-width: min(100%, 420px);
+        margin: 0.75rem auto;
+        padding: 0.6rem 1rem;
+        border-radius: 16px;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+
+    .room-playlist__link {
+        width: fit-content;
+        max-width: 100%;
+        margin: 0.75rem auto 0;
+        padding: 0.45rem 0.8rem;
+        border-radius: 12px;
+        color: #33472f;
+        font-size: 0.875rem;
+    }
+
+/* One continuous glass footer */
+.site-footer {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+
+    margin-top: 30px;
+    padding: 1rem 1.25rem;
+
+    border: 1px solid rgb(255 255 255 / 45%);
+    border-radius: 20px;
+
+    background: rgb(255 248 237 / 35%);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 4px 18px rgb(67 52 37 / 8%);
+    color: #3b2c20;
+}
+
+/* Remove the separate glass cards */
+.site-footer > * {
+    min-width: 0;
+    max-width: 100%;
+    padding: 0;
+
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+
+    overflow-wrap: anywhere;
+}
+
+.site-footer p,
+.site-footer a {
+    color: #3b2c20;
+}
 }
