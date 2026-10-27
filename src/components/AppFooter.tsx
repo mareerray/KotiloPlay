@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 function AppFooter() {
     return (
@@ -6,6 +7,9 @@ function AppFooter() {
             <div>
                 <p className="site-footer__brand">KotiloPlay</p>
                 <p>A cozy home for your music.</p>
+                <Link to="/about" className="site-footer__about">
+                    About &amp; how to use
+                </Link>
             </div>
 
             <div className="site-footer__meta">

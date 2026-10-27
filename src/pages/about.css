@@ -1,0 +1,160 @@
+.about-page {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 760px;
+    margin: 1.5rem auto 2.5rem;
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+
+    border: 1px solid rgb(255 255 255 / 65%);
+    border-radius: 28px;
+    background: rgb(255 248 237 / 78%);
+
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+
+    color: #493729;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+}
+
+.about-page__back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-bottom: 1rem;
+
+    color: #52664f;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.about-page__intro {
+    margin-bottom: 2rem;
+}
+
+.about-page__eyebrow {
+    margin: 0 0 0.5rem;
+    color: #80503e;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.about-page h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1.2;
+}
+
+.about-page h2 {
+    margin: 0 0 0.75rem;
+    color: #52664f;
+    font-size: clamp(1.15rem, 3vw, 1.35rem);
+    line-height: 1.4;
+}
+
+.about-page p {
+    margin: 0 0 1rem;
+}
+
+.about-page__section {
+    margin-top: 1.75rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid rgb(90 69 46 / 15%);
+}
+
+.about-page__steps,
+.about-page__list {
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+}
+
+.about-page li + li {
+    margin-top: 0.6rem;
+}
+
+.about-page li::marker {
+    color: #52664f;
+    font-weight: 700;
+}
+
+.about-page a {
+    color: #40523b;
+    text-underline-offset: 4px;
+}
+
+.about-page a:hover {
+    text-decoration: underline;
+}
+
+.about-page a:focus-visible {
+    outline: 3px solid #52664f;
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.about-page .about-page__note {
+    margin-top: 1.25rem;
+    font-size: 0.85rem;
+}
+
+.about-page__home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.1rem;
+
+    border: 1px solid #c6cfb7;
+    border-radius: 999px;
+    background: #e9eedf;
+
+    font-weight: 700;
+    text-decoration: none;
+}
+
+@media (max-width: 600px) {
+    .about-page {
+        margin-block: 1rem 1.5rem;
+        border-radius: 20px;
+    }
+}
+
+/* Full-page wallpaper, only while About is open */
+body.about-background {
+    min-height: 100vh;
+    background-color: #f3e8d5;
+    background-image: url("../assets/svg/wallpaper-home.svg");
+    background-repeat: repeat;
+}
+
+/* This wrapper now handles spacing only */
+.about-wallpaper {
+    box-sizing: border-box;
+    width: 100%;
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+/* Keep the glass panel centered */
+.about-wallpaper .about-page {
+    margin: 0 auto;
+    background: rgb(255 248 237 / 82%);
+}
+
+@media (max-width: 600px) {
+    body.about-background {
+        background-size: 100px auto;
+    }
+
+    .about-wallpaper {
+        padding: 0.75rem;
+    }
+
+    .about-page {
+        padding: 1rem;
+        zoom: 0.95;
+    }
+}

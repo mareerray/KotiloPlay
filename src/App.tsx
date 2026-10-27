@@ -4,6 +4,7 @@ import AppFooter from "./components/AppFooter";
 import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
 import PWAUpdatePrompt from "./components/PWAUpdatePrompt";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/rooms/:roomId" element={<RoomPage />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
           
