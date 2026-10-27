@@ -16,6 +16,14 @@ Inspired by the homepage of my home inventory app, [Kotilo](https://kotilo-nu.ve
 
 [Visit KotiloPlay](https://kotilo-play.vercel.app/)
 
+<h2>Preview</h2>
+
+<img
+  src="docs/kotiloplay-demo.gif"
+  alt="KotiloPlay demo showing the interactive house, cozy rooms, and music player"
+  width="700"
+/>
+
 ## Features
 
 ### An interactive little home
