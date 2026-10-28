@@ -42,7 +42,7 @@ export const rooms: Room[] = [
     scene: summerKitchen,
     sceneAlt:
     "A cozy summer kitchen with open windows, pink curtains, flowers, fresh bread, and steaming breakfast tea.",
-    videoId: "ACgBAX4BP94",
+    videoId: "1EXvG7uknbc",
   },
   {
     id: "bathroom",
