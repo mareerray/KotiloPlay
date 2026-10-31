@@ -146,8 +146,15 @@ select {
 ::view-transition-old(*),
 ::view-transition-new(*),
 ::view-transition-group(*) {
-    animation-duration: 600ms;
+    animation-duration: 350ms;
     animation-timing-function: ease-in-out;
+}
+
+:root:active-view-transition .house-sky *,
+:root:active-view-transition .house-music *,
+:root:active-view-transition .chimney-smoke,
+:root:active-view-transition [class*="garden-butterfly"] {
+    animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
