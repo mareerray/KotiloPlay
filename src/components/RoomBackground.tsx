@@ -11,8 +11,15 @@ function RoomBackground({ src, alt }: RoomBackgroundProps) {
                 src={src}
                 alt=""
                 aria-hidden="true"
+                decoding="async"
             />
-            <img className="room-bg__image" src={src} alt={alt} />
+            <img 
+                className="room-bg__image" 
+                src={src} 
+                alt={alt} 
+                fetchPriority="high"
+                decoding="async" 
+            />
         </div>
     );
 }
