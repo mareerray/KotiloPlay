@@ -28,7 +28,7 @@ body {
     isolation: isolate;
 }
 
-.app-shell > main {
+.app-shell>main {
     flex: 1;
 }
 
@@ -139,5 +139,23 @@ select {
 
     .pwa-update__actions button {
         flex: 1;
+    }
+}
+
+/* Page Transition */
+.page-fade {
+    animation: page-in 450ms ease-out both;
+}
+
+@keyframes page-in {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-fade {
+        animation: none;
     }
 }

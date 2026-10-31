@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import RoomPage from "./pages/RoomPage";
 import PWAUpdatePrompt from "./components/PWAUpdatePrompt";
 import AboutPage from "./pages/AboutPage";
+import PageTransition from "./components/PageTransition";
 
 function App() {
   return (
@@ -13,11 +14,13 @@ function App() {
         <AppHeader />
 
         <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/rooms/:roomId" element={<RoomPage />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
+          <PageTransition>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/rooms/:roomId" element={<RoomPage />} />
+              <Route path="/about" element={<AboutPage />} />
+            </Routes>
+          </PageTransition>
         </main>
           
         <AppFooter />
